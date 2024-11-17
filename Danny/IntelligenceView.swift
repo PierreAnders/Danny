@@ -5,19 +5,51 @@ struct IntelligenceView: View {
     @State private var meditationMinutes: Double = 0
     let healthStore = HKHealthStore()
     
+    @Environment(\.dismiss) private var dismiss
+
+    
     var body: some View {
         VStack {
+            VStack(spacing: 16) {
             
             PixelIconView(iconName: "book", primaryColor: .blue)
+                    .padding(.bottom, 15)
+                    .padding(.top, 80)
             
-            PixelLetterView(text: "T E M P S   D E   M E D I T A T I O N", primaryColor: .white, backgroundColor: .black)
-                .padding()
-            
-            PixelLetterView(text: "\(formatNumber(Int(meditationMinutes))) M I N", primaryColor: .white, backgroundColor: .black)
-                           .padding()
-            
-            Spacer()
+            PixelLetterView(text: "M E D I T A T I O N", primaryColor: .white, backgroundColor: .black)
+                    .padding(.bottom, 30)
+                
+                HStack {
+                    PixelLetterView(
+                        text: "P L E I N E   C O N S C I E N C E",
+                        primaryColor: .white,
+                        backgroundColor: .black
+                    ).opacity(0.5)
+                    Spacer()
+                    PixelLetterView(text: "\(formatNumber(Int(meditationMinutes)))", primaryColor: .blue, backgroundColor: .black)
+                    PixelLetterView(text: "M I N", primaryColor: .blue, backgroundColor: .black)
+                        .opacity(0.5)
+                }
+                .padding().padding(.horizontal, 40)
+            }
+            .padding(.bottom, 60) // Ajoute de l'espace pour le menu
         }
+        .safeAreaInset(edge: .bottom) {
+            // Menu en bas
+            HStack {
+                Button(action: {
+                    dismiss()
+                }) {
+                    VStack {
+                        Spacer()
+                        PixelIconView(iconName: "arrow").opacity(0.5)
+                    }
+                }
+                Spacer()
+            }
+            .padding()
+        }
+    .navigationBarHidden(true)
         .onAppear(perform: fetchMeditationTime)
     }
     
@@ -44,5 +76,5 @@ struct IntelligenceView: View {
 }
 
 #Preview {
-    IntelligenceView()
+    IntelligenceView().preferredColorScheme(.dark)
 }

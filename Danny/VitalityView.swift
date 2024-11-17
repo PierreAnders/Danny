@@ -2,52 +2,88 @@ import SwiftUI
 import HealthKit
 
 struct VitalityView: View {
-    @State private var basalCalories: Double = 0 // Variable pour stocker les calories basales
-    @State private var respiratoryRate: Double = 0 // Variable pour stocker la fréquence respiratoire
-    @State private var heartRate: Double = 0 // Variable pour stocker la fréquence cardiaque
-    @State private var heartRateVariability: Double = 0 // Variable pour stocker la variabilité de la fréquence cardiaque
+    @State private var basalCalories: Double = 0
+    @State private var respiratoryRate: Double = 0
+    @State private var heartRate: Double = 0
+    @State private var heartRateVariability: Double = 0
     let healthStore = HKHealthStore()
     
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
-        ScrollView { // Ajout du ScrollView pour permettre le défilement
+        VStack {
             VStack(spacing: 16) {
                 PixelIconView(iconName: "heart", primaryColor: .green)
                     .padding(.bottom, 15)
                     .padding(.top, 80)
                 
-                // TODO SUITE
-//                PixelLetterView(text: "V I T A L I T E, primaryColor: .white)
-//                    .padding(.bottom, 30)
-//                
-//                                HStack {
-                PixelLetterView(text: "C A L O R I E S   A U   R E P O S", primaryColor: .white, backgroundColor: .black)
-                    .padding()
                 
-                PixelLetterView(text: "\(formatNumber(Int(basalCalories)))   K C A L", primaryColor: .white, backgroundColor: .black)
-                    .padding()
+                PixelLetterView(text: "V I T A L I T E", primaryColor: .white)
+                    .padding(.bottom, 30)
                 
-                PixelLetterView(text: "F R É Q U E N C E   R E S P I R A T O I R E", primaryColor: .white, backgroundColor: .black)
-                    .padding()
+                HStack {
+                    PixelLetterView(text: "C A L O R I E S   A U   R E P O S", primaryColor: .white, backgroundColor: .black)
+                        .opacity(0.5)
+                    Spacer()
+                    PixelLetterView(text: "\(formatNumber(Int(basalCalories)))", primaryColor: .green, backgroundColor: .black)
+                    PixelLetterView(
+                        text: "K C A L",
+                        primaryColor: .green,
+                        backgroundColor: .black
+                    ).opacity(0.5)
+                }
+                .padding().padding(.horizontal, 40)
+                    
+                HStack {
+                    PixelLetterView(text: "F R E Q U E N C E   R E S P I R A T O I R E", primaryColor: .white, backgroundColor: .black)
+                        .opacity(0.5)
+                    Spacer()
+                    PixelLetterView(text: "\(formatNumber(Int(respiratoryRate)))", primaryColor: .green, backgroundColor: .black)
+                    PixelLetterView(text: "R P M", primaryColor: .green, backgroundColor: .black)
+                        .opacity(0.5)
+                }
+                .padding().padding(.horizontal, 40)
+                HStack {
+                    PixelLetterView(text: "F R E Q U E N C E   C A R D I A Q U E", primaryColor: .white, backgroundColor: .black)
+                        .opacity(0.5)
+                    Spacer()
+                    PixelLetterView(text: "\(formatNumber(Int(heartRate)))", primaryColor: .green, backgroundColor: .black)
+                    PixelLetterView(text: "B P M", primaryColor: .green, backgroundColor: .black)
+                        .opacity(0.5)
+                }
+                .padding().padding(.horizontal, 40)
                 
-                PixelLetterView(text: "\(formatNumber(Int(respiratoryRate)))   R P M", primaryColor: .white, backgroundColor: .black)
-                    .padding()
-                
-                PixelLetterView(text: "F R É Q U E N C E   C A R D I A Q U E", primaryColor: .white, backgroundColor: .black)
-                    .padding()
-                
-                PixelLetterView(text: "\(formatNumber(Int(heartRate)))   B P M", primaryColor: .white, backgroundColor: .black) // Affichage de la fréquence cardiaque
-                    .padding()
-                
-                PixelLetterView(text: "V A R I A B I L I T É   F C", primaryColor: .white, backgroundColor: .black)
-                    .padding()
-                
-                PixelLetterView(text: "\(formatNumber(Int(heartRateVariability)))   M S", primaryColor: .white, backgroundColor: .black) // Affichage de la variabilité de la fréquence cardiaque
-                    .padding()
-
+                HStack {
+                    
+                    PixelLetterView(text: "V A R I A B I L I T É   F C", primaryColor: .white, backgroundColor: .black)
+                        .opacity(0.5)
+                        Spacer()
+                    
+                    PixelLetterView(text: "\(formatNumber(Int(heartRateVariability)))", primaryColor: .green, backgroundColor: .black)
+                    
+                    PixelLetterView(text: "M S", primaryColor: .green, backgroundColor: .black).opacity(0.5)
+                }
+                .padding().padding(.horizontal, 40)
+            }
+            .padding(.bottom, 60)
+        }
+        .safeAreaInset(edge: .bottom) {
+            // Menu en bas
+            HStack {
+                Button(action: {
+                    dismiss()
+                }) {
+                    VStack {
+                        Spacer()
+                        PixelIconView(iconName: "arrow").opacity(0.5)
+                    }
+                }
                 Spacer()
             }
+            .padding()
         }
-        .onAppear(perform: startHealthQueries)
+    .navigationBarHidden(true)
+    .onAppear(perform: startHealthQueries)
     }
     
     func formatNumber(_ number: Int) -> String {
@@ -188,5 +224,5 @@ struct VitalityView: View {
 }
 
 #Preview{
-   VitalityView()
+   VitalityView().preferredColorScheme(.dark)
 }
