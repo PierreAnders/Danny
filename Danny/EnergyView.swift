@@ -21,19 +21,24 @@ struct EnergyView: View {
                     .padding()
                 
                 // Affichage du temps total de sommeil
-                PixelLetterView(text: "\(formatNumber(Int(sleepMinutes)))   M I N", primaryColor: .white, backgroundColor: .black)
-                    .padding()
+                PixelLetterView(
+                    text: (formatMinutesToHoursAndMinutes(sleepMinutes)),
+                    primaryColor: .white,
+                    backgroundColor: .black
+                )
+                .padding()
+
                 
                 // Affichage des détails par phase de sommeil
-                VStack(alignment: .leading, spacing: 10) { // Espacement entre les lignes de texte
-                    Text("Sommeil Léger (Core): \(Int(coreSleepMinutes)) min")
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Sommeil Léger (Core): \(formatMinutesToHoursAndMinutes(coreSleepMinutes))")
                         .foregroundColor(.white)
-                    Text("Sommeil Profond (Deep): \(Int(deepSleepMinutes)) min")
+                    Text("Sommeil Profond (Deep): \(formatMinutesToHoursAndMinutes(deepSleepMinutes))")
                         .foregroundColor(.white)
-                    Text("Sommeil Paradoxal (REM): \(Int(remSleepMinutes)) min")
+                    Text("Sommeil Paradoxal (REM): \(formatMinutesToHoursAndMinutes(remSleepMinutes))")
                         .foregroundColor(.white)
-                    Text("Temps Éveillé (Awake): \(Int(awakeMinutes)) min") // Afficher le temps d'éveil
-                            .foregroundColor(.white)
+                    Text("Temps Éveillé (Awake): \(formatMinutesToHoursAndMinutes(awakeMinutes))") // Affiche le temps d'éveil
+                        .foregroundColor(.white)
                 }
                 .padding()
                 
@@ -49,6 +54,12 @@ struct EnergyView: View {
                 requestHealthKitAuthorization()
             }
         }
+    }
+    
+    func formatMinutesToHoursAndMinutes(_ minutes: Double) -> String {
+        let hours = Int(minutes) / 60
+        let remainingMinutes = Int(minutes) % 60
+        return "\(hours) h \(remainingMinutes) min"
     }
     
     func formatNumber(_ number: Int) -> String {

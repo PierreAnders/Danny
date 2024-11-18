@@ -74,6 +74,13 @@ struct PixelLetterView: View {
             [.white, .clear, .white],
             [.white, .clear, .white]
         ],
+        "h": [
+            [.white, .clear, .white],
+            [.white, .clear, .white],
+            [.white, .white, .white],
+            [.white, .clear, .white],
+            [.white, .clear, .white]
+        ],
         "I": [
             [.white, .white, .white],
             [.clear, .white, .clear],
