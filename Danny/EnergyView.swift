@@ -6,7 +6,9 @@ struct EnergyView: View {
     @State private var coreSleepMinutes: Double = 0
     @State private var deepSleepMinutes: Double = 0
     @State private var remSleepMinutes: Double = 0
+    @State private var awakeMinutes: Double = 0
     @State private var isAuthorized: Bool = false
+    
     let healthStore = HKHealthStore()
     
     var body: some View {
@@ -30,6 +32,8 @@ struct EnergyView: View {
                         .foregroundColor(.white)
                     Text("Sommeil Paradoxal (REM): \(Int(remSleepMinutes)) min")
                         .foregroundColor(.white)
+                    Text("Temps Éveillé (Awake): \(Int(awakeMinutes)) min") // Afficher le temps d'éveil
+                            .foregroundColor(.white)
                 }
                 .padding()
                 
@@ -71,8 +75,16 @@ struct EnergyView: View {
     func fetchSleepAnalysis() {
         let sleepType = HKCategoryType.categoryType(forIdentifier: .sleepAnalysis)!
         let now = Date()
-        let startOfDay = Calendar.current.startOfDay(for: now)
-        let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
+        
+        // Calculer 18h de la veille
+        let calendar = Calendar.current
+        var startOfPeriod = calendar.date(bySettingHour: 18, minute: 0, second: 0, of: now)!
+        startOfPeriod = calendar.date(byAdding: .day, value: -1, to: startOfPeriod)! // La veille à 18h
+        
+        // Calculer midi du jour actuel
+        let endOfPeriod = calendar.date(bySettingHour: 12, minute: 0, second: 0, of: now)!
+        
+        let predicate = HKQuery.predicateForSamples(withStart: startOfPeriod, end: endOfPeriod, options: .strictStartDate)
 
         let query = HKSampleQuery(sampleType: sleepType, predicate: predicate, limit: 0, sortDescriptors: nil) { _, results, error in
             if let error = error {
@@ -87,43 +99,43 @@ struct EnergyView: View {
 
             print("Nombre d'échantillons trouvés : \(results.count)")
             
-            // Variables temporaires pour calculer les durées par phase
             var totalSleepTime = 0.0
             var coreSleepTime = 0.0
             var deepSleepTime = 0.0
             var remSleepTime = 0.0
+            var awakeTime = 0.0
             
-            // Calcul du temps total et par phase de sommeil
             for sample in results {
                 let sleepDuration = sample.endDate.timeIntervalSince(sample.startDate) / 60.0
-                
+                print("Sample: \(sample.startDate) - \(sample.endDate) - Value: \(sample.value)")
+
                 switch sample.value {
                 case HKCategoryValueSleepAnalysis.asleepCore.rawValue:
                     coreSleepTime += sleepDuration
+                    totalSleepTime += sleepDuration // Ajouter au total le temps de sommeil léger
                 case HKCategoryValueSleepAnalysis.asleepDeep.rawValue:
                     deepSleepTime += sleepDuration
+                    totalSleepTime += sleepDuration // Ajouter au total le temps de sommeil profond
                 case HKCategoryValueSleepAnalysis.asleepREM.rawValue:
                     remSleepTime += sleepDuration
-                case HKCategoryValueSleepAnalysis.asleepUnspecified.rawValue,
-                     HKCategoryValueSleepAnalysis.asleep.rawValue:
-                    totalSleepTime += sleepDuration
-                    
+                    totalSleepTime += sleepDuration // Ajouter au total le temps de sommeil paradoxal
+                case HKCategoryValueSleepAnalysis.awake.rawValue:
+                    awakeTime += sleepDuration // Calculer le temps d'éveil
                 default:
-                    break // Ignorer les autres types comme éveillé (awake)
+                    break // Ignorer les autres types (sommeil indéfini)
                 }
-                
-                totalSleepTime += sleepDuration // Ajouter toutes les phases au temps total de sommeil
             }
 
-            // Mise à jour sur le thread principal
             DispatchQueue.main.async {
                 self.sleepMinutes = totalSleepTime
                 self.coreSleepMinutes = coreSleepTime
                 self.deepSleepMinutes = deepSleepTime
                 self.remSleepMinutes = remSleepTime
+                self.awakeMinutes = awakeTime // Mettre à jour l'affichage du temps d'éveil
             }
         }
 
         healthStore.execute(query)
     }
+
 }
