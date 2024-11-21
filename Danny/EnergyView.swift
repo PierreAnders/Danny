@@ -15,7 +15,7 @@ struct EnergyView: View {
         ScrollView { // Ajout d'un ScrollView pour permettre le défilement
             VStack(spacing: 20) { // Espacement entre les éléments
                 
-                PixelIconView(iconName: "book", primaryColor: .blue)
+                PixelIconView(iconName: "lightning", primaryColor: .purple)
                 
                 PixelLetterView(text: "D U R E E   S O M M E I L", primaryColor: .white, backgroundColor: .black)
                     .padding()

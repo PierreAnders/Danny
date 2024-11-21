@@ -208,74 +208,74 @@ struct PixelLetterView: View {
             [.white, .white, .white]
         ],
         "1": [
-            [.clear, .white, .clear],
-            [.white, .white, .clear],
-            [.clear, .white, .clear],
-            [.clear, .white, .clear],
-            [.clear, .white, .clear]
+            [.clear, .white, .clear, .clear],
+            [.white, .white, .clear, .clear],
+            [.clear, .white, .clear, .clear],
+            [.clear, .white, .clear, .clear],
+            [.clear, .white, .clear, .clear]
         ],
         "2": [
-            [.white, .white, .white],
-            [.clear, .clear, .white],
-            [.white, .white, .white],
-            [.white, .clear, .clear],
-            [.white, .white, .white]
+            [.white, .white, .white, .clear],
+            [.clear, .clear, .white, .clear],
+            [.white, .white, .white, .clear],
+            [.white, .clear, .clear, .clear],
+            [.white, .white, .white, .clear]
         ],
         "3": [
-            [.white, .white, .white],
-            [.clear, .clear, .white],
-            [.clear, .white, .white],
-            [.clear, .clear, .white],
-            [.white, .white, .white]
+            [.white, .white, .white, .clear],
+            [.clear, .clear, .white, .clear],
+            [.clear, .white, .white, .clear],
+            [.clear, .clear, .white, .clear],
+            [.white, .white, .white, .clear]
         ],
         "4": [
-            [.white, .clear, .white],
-            [.white, .clear, .white],
-            [.white, .white, .white],
-            [.clear, .clear, .white],
-            [.clear, .clear, .white]
+            [.white, .clear, .white, .clear],
+            [.white, .clear, .white, .clear],
+            [.white, .white, .white, .clear],
+            [.clear, .clear, .white, .clear],
+            [.clear, .clear, .white, .clear]
         ],
         "5": [
-            [.white, .white, .white],
-            [.white, .clear, .clear],
-            [.white, .white, .white],
-            [.clear, .clear, .white],
-            [.white, .white, .white]
+            [.white, .white, .white, .clear],
+            [.white, .clear, .clear, .clear],
+            [.white, .white, .white, .clear],
+            [.clear, .clear, .white, .clear],
+            [.white, .white, .white, .clear]
         ],
         "6": [
-            [.white, .white, .white],
-            [.white, .clear, .clear],
-            [.white, .white, .white],
-            [.white, .clear, .white],
-            [.white, .white, .white]
+            [.white, .white, .white, .clear],
+            [.white, .clear, .clear, .clear],
+            [.white, .white, .white, .clear],
+            [.white, .clear, .white, .clear],
+            [.white, .white, .white, .clear]
         ],
         "7": [
-            [.white, .white, .white],
-            [.clear, .clear, .white],
-            [.clear, .clear, .white],
-            [.clear, .clear, .white],
-            [.clear, .clear, .white]
+            [.white, .white, .white, .clear],
+            [.clear, .clear, .white, .clear],
+            [.clear, .clear, .white, .clear],
+            [.clear, .clear, .white, .clear],
+            [.clear, .clear, .white, .clear]
         ],
         "8": [
-            [.white, .white, .white],
-            [.white, .clear, .white],
-            [.white, .white, .white],
-            [.white, .clear, .white],
-            [.white, .white, .white]
+            [.white, .white, .white, .clear],
+            [.white, .clear, .white, .clear],
+            [.white, .white, .white, .clear],
+            [.white, .clear, .white, .clear],
+            [.white, .white, .white, .clear]
         ],
         "9": [
-            [.white, .white, .white],
-            [.white, .clear, .white],
-            [.white, .white, .white],
-            [.clear, .clear, .white],
-            [.white, .white, .white]
+            [.white, .white, .white, .clear],
+            [.white, .clear, .white, .clear],
+            [.white, .white, .white, .clear],
+            [.clear, .clear, .white, .clear],
+            [.white, .white, .white, .clear]
         ],
         "0": [
-            [.clear, .white, .clear],
-            [.white, .clear, .white],
-            [.white, .clear, .white],
-            [.white, .clear, .white],
-            [.clear, .white, .clear]
+            [.clear, .white, .clear, .clear],
+            [.white, .clear, .white, .clear],
+            [.white, .clear, .white, .clear],
+            [.white, .clear, .white, .clear],
+            [.clear, .white, .clear, .clear]
         ],
         "^": [
             [.clear, .white, .white, .white, .clear, .clear, .white, .white, .white, .clear],
