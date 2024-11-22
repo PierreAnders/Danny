@@ -7,85 +7,11 @@
 
 import SwiftUI
 
-struct PixelIconView: View {
+struct PixelFoxView: View {
     let pixelSize: CGFloat = 2.5
     let spacing: CGFloat = 0.5
     
     let icons: [String: [[Color]]] = [
-        "heart": [
-            [.clear, .white, .white, .white, .clear, .clear, .white, .white, .white, .clear],
-            [.white, .white, .white, .white, .white, .white, .white, .white, .white, .white],
-            [.white, .white, .white, .white, .white, .white, .white, .white, .white, .white],
-
-            [.white, .white, .white, .white, .white, .white, .white, .white, .white, .white],
-            [.clear, .white, .white, .white, .white, .white, .white, .white, .white, .clear],
-            [.clear, .clear, .white, .white, .white, .white, .white, .white, .clear, .clear],
-            [.clear, .clear, .clear, .white, .white, .white, .white, .clear, .clear, .clear],
-            [.clear, .clear, .clear, .clear, .white, .white, .clear, .clear, .clear, .clear],
-        ],
-        "lightning": [
-            [.clear, .clear, .clear, .clear, .white, .clear],
-            [.clear, .clear, .clear, .white, .clear, .clear],
-            [.clear, .clear, .white, .white, .clear, .clear],
-            [.clear, .clear, .white, .white, .clear, .clear],
-            [.clear, .white, .white, .clear, .clear, .clear],
-            [.white, .white, .white, .white, .white, .white],
-            [.clear, .clear, .clear, .white, .white, .clear],
-            [.clear, .clear, .white, .white, .clear, .clear],
-            [.clear, .clear, .white, .white, .clear, .clear],
-            [.clear, .clear, .white, .clear, .clear, .clear],
-            [.clear, .white, .clear, .clear, .clear, .clear],
-        ],
-        "hand": [
-            [.clear, .clear, .white, .clear, .white, .white, .clear, .white, .clear],
-            [.white, .clear, .white, .clear, .white, .white, .clear, .white, .clear],
-            [.white, .clear, .white, .clear, .white, .white, .clear, .white, .clear],
-            [.white, .clear, .white, .clear, .clear, .clear, .clear, .clear, .clear],
-            [.clear, .clear, .clear, .clear, .white, .white, .white, .white, .clear],
-            [.white, .white, .white, .clear, .white, .white, .white, .white, .white],
-            [.white, .white, .white, .clear, .clear, .clear, .clear, .white, .white],
-            [.white, .white, .white, .white, .white, .clear, .white, .white, .white],
-            [.clear, .white, .white, .white, .clear, .white, .white, .white, .clear],
-            [.clear, .clear, .white, .white, .white, .white, .white, .clear, .clear],
-        ],
-        "book": [
-            [.clear, .white, .white, .white, .white, .white, .clear, .white, .white, .white, .white, .white, .clear],
-            [.white, .clear, .clear, .clear, .clear, .clear, .white, .clear, .clear, .clear, .clear, .clear, .white],
-            [.white, .clear, .white, .white, .white, .white, .clear, .white, .white, .white, .white, .clear, .white],
-            [.white, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .white],
-            [.white, .clear, .white, .white, .white, .white, .clear, .white, .white, .white, .white, .clear, .white],
-            [.white, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .white],
-            [.white, .clear, .white, .white, .white, .white, .clear, .white, .white, .white, .white, .clear, .white],
-            [.white, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .white],
-            [.clear, .white, .white, .white, .white, .white, .clear, .white, .white, .white, .white, .white, .clear],
-            [.clear, .clear, .clear, .clear, .clear, .clear, .white, .clear, .clear, .clear, .clear, .clear, .clear],
-        ],
-        "boot": [
-            [.clear, .clear, .white, .white, .white, .white, .white, .white, .white, .clear, .clear, .clear],
-            [.clear, .clear, .clear, .clear, .white, .white, .white, .white, .white, .clear, .clear, .clear],
-            [.white, .white, .white, .white, .white, .clear, .white, .white, .white, .clear, .clear, .clear],
-            [.clear, .clear, .white, .white, .white, .white, .clear, .white, .white, .clear, .clear, .clear],
-            [.clear, .white, .white, .white, .white, .white, .clear, .white, .white, .clear, .clear, .clear],
-            [.clear, .clear, .clear, .white, .white, .white, .clear, .clear, .clear, .clear, .clear, .clear],
-            [.clear, .white, .white, .white, .white, .white, .clear, .white, .white, .clear, .clear, .clear],
-            [.clear, .clear, .clear, .clear, .white, .white, .white, .white, .white, .clear, .clear, .clear],
-            [.clear, .clear, .clear, .white, .white, .white, .white, .white, .white, .clear, .clear, .clear],
-            [.clear, .clear, .clear, .white, .white, .white, .white, .white, .white, .white, .clear, .clear],
-            [.clear, .clear, .clear, .white, .white, .white, .white, .white, .white, .white, .white, .clear],
-            [.clear, .clear, .clear, .clear, .clear, .clear, .white, .white, .white, .white, .white, .white],
-            [.clear, .clear, .clear, .white, .white, .clear, .clear, .white, .white, .white, .white, .white],
-        ],
-        "arrow": [
-            [.clear, .clear, .clear, .clear, .white, .clear, .clear, .clear, .white, .clear, .clear, .clear],
-            [.clear, .clear, .clear, .white, .clear, .clear, .clear, .white, .clear, .clear, .clear, .clear],
-            [.clear, .clear, .white, .clear, .clear, .clear, .white, .clear, .clear, .clear, .clear, .clear],
-            [.clear, .white, .clear, .clear, .clear, .white, .clear, .clear, .clear, .clear, .clear, .clear],
-            [.white, .clear, .clear, .clear, .white, .clear, .clear, .clear, .clear, .clear, .clear, .clear],
-            [.clear, .white, .clear, .clear, .clear, .white, .clear, .clear, .clear, .clear, .clear, .clear],
-            [.clear, .clear, .white, .clear, .clear, .clear, .white, .clear, .clear, .clear, .clear, .clear],
-            [.clear, .clear, .clear, .white, .clear, .clear, .clear, .white, .clear, .clear, .clear, .clear],
-            [.clear, .clear, .clear, .clear, .white, .clear, .clear, .clear, .white, .clear, .clear, .clear],
-        ],
         "fox": [
             [.clear, .clear, .clear, .clear, .white, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .white, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear],
             [.clear, .clear, .clear, .clear, .white, .white, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .white, .white, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear],
@@ -142,26 +68,31 @@ struct PixelIconView: View {
         ]
     ]
     
-let iconName: String
-    var primaryColor: Color = .white
-    var backgroundColor: Color = .clear
+    let iconName: String
     
-    var body: some View {
-        VStack(spacing: spacing) {
-            if let pixels = icons[iconName] {
-                ForEach(0..<pixels.count, id: \.self) { row in
-                    HStack(spacing: spacing) {
-                        ForEach(0..<pixels[row].count, id: \.self) { col in
-                            Rectangle()
-                                .fill(pixels[row][col] == .white ? primaryColor : backgroundColor)
-                                .frame(width: pixelSize, height: pixelSize)
+    var colorMapping: [Color: Color] = [
+        .white: .white,   // Exemple : remplace le blanc par du bleu
+        .black: .black,   // Exemple : remplace le noir par du gris
+        .brown: .brown, // Exemple : remplace le marron par de l'orange
+        .clear: .clear   // Garde les pixels transparents
+        ]
+
+        var body: some View {
+            VStack(spacing: spacing) {
+                if let pixels = icons[iconName] {
+                    ForEach(0..<pixels.count, id: \.self) { row in
+                        HStack(spacing: spacing) {
+                            ForEach(0..<pixels[row].count, id: \.self) { col in
+                                Rectangle()
+                                    .fill(colorMapping[pixels[row][col], default: .clear]) // Utilise le mappage des couleurs
+                                    .frame(width: pixelSize, height: pixelSize)
+                            }
                         }
                     }
+                } else {
+                    Text("Icône non trouvée")
+                        .foregroundColor(.red)
                 }
-            } else {
-                Text("Icône non trouvée")
-                    .foregroundColor(.red)
             }
         }
     }
-}

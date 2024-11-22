@@ -25,7 +25,7 @@ struct ProfileView: View {
                 HStack {
                     NavigationLink(destination: NameCreationView()) {
                         HStack(spacing: 8) {
-                            PixelHeadView().frame(width: 40, height: 40)
+                            PixelFoxView(iconName: "fox") // .frame(width: 40, height: 40)
                             PixelLetterView(text: userName.isEmpty ? "D A N N Y" : userName.uppercased(), primaryColor: .white)
                                 .opacity(0.5)
                                 .padding()
